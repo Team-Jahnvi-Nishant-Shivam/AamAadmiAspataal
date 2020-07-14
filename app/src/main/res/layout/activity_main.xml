@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".activity.MainActivity">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="32dp"
+        android:fontFamily="@font/mb"
+        android:text="WELCOME"
+        android:textColor="@color/green"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/title1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:ellipsize="end"
+        android:fontFamily="@font/mb"
+        android:maxLines="1"
+        android:text="PATIENT"
+        android:textColor="@color/green"
+        android:textSize="45sp" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="fitEnd"
+        android:layout_below="@id/option2"
+        android:src="@drawable/wash1"/>
+
+    <TextView
+        android:id="@+id/profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title1"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:ellipsize="end"
+        android:visibility="gone"
+        android:fontFamily="@font/mb"
+        android:text="SETUP PROFILE"
+        android:textColor="@color/grey"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/option"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title1"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="32dp"
+        android:ellipsize="end"
+        android:fontFamily="@font/mb"
+        android:text="VIEW ALL\nAPPOINTMENTS"
+        android:textColor="@color/grey"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/option1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/option"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="32dp"
+        android:ellipsize="end"
+        android:fontFamily="@font/mb"
+        android:text="BOOK NEW\nAPPOINTMENT"
+        android:textColor="@color/grey"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/option2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/option1"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="32dp"
+        android:ellipsize="end"
+        android:fontFamily="@font/mb"
+        android:text="VIEW OLD\nPRESCRIPTIONS"
+        android:textColor="@color/grey"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/option3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/option2"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="32dp"
+        android:ellipsize="end"
+        android:fontFamily="@font/mb"
+        android:text="ASK LIVE \nQUESTION"
+        android:textColor="@color/grey"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/option4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/option3"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="32dp"
+        android:ellipsize="end"
+        android:fontFamily="@font/mb"
+        android:text="LOGOUT"
+        android:textColor="@color/grey"
+        android:textSize="20sp" />
+
+
+</RelativeLayout>

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "33295553229",
+    "firebase_url": "https://cvoid19-hospital.firebaseio.com",
+    "project_id": "cvoid19-hospital",
+    "storage_bucket": "cvoid19-hospital.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:33295553229:android:796ac872e9ecc0d6b44f84",
+        "android_client_info": {
+          "package_name": "com.nsh.covid19.hospital"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "33295553229-oqt7d4ggadj1o3hv8t9s030sve6ubng5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.nsh.covid19.hospital",
+            "certificate_hash": "81afa78c764b6b2eca6b017b450d10744a905a03"
+          }
+        },
+        {
+          "client_id": "33295553229-ruju4k1b324h0t2ue27fva22vcjavmmn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBp0odI-40-PnRD-11nNK3zBMJ6zufv5rs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "33295553229-if5rnb82p7jkfhkrim4si9ns9f4uqqj7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

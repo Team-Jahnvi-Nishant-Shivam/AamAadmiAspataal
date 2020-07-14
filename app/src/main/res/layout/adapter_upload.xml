@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="8dp"
+    android:layout_marginRight="8dp"
+    android:background="@drawable/ic_shape_green_corner_8dp"
+    tools:context=".activity.MainActivity">
+
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="100dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/wash1"
+        android:layout_height="100dp"/>
+
+</RelativeLayout>
