@@ -10,7 +10,10 @@ import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.nsh.covid19.hospital.R
 import okhttp3.*
 import java.io.IOException
@@ -24,6 +27,21 @@ class IntroActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_intro)
+
+        val callRef = FirebaseDatabase.getInstance().getReference("server")
+        val callListener = object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()) {
+                    val preference: SharedPreferences = getSharedPreferences("covid", 0)
+                    val editor: SharedPreferences.Editor = preference.edit()
+                    editor.putString("server", snapshot.getValue(String::class.java))
+                    editor.commit()
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {}
+        }
+        callRef.addValueEventListener(callListener)
 
         val auth = FirebaseAuth.getInstance()
         if (auth.currentUser != null) {
@@ -76,6 +94,7 @@ class IntroActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+        println(getSharedPreferences("covid", 0).getString("server","https://883aad4af71a.ngrok.io"))
         if (requestCode == RC_SIGN_IN) {
             val response = IdpResponse.fromResultIntent(data)
 
@@ -94,8 +113,9 @@ class IntroActivity : AppCompatActivity() {
                     val client = OkHttpClient().newBuilder().build()
                     val mediaType: MediaType? = MediaType.parse("text/plain")
                     val body = RequestBody.create(mediaType, "")
+
                     val request: Request = Request.Builder()
-                            .url("https://fa4b4c235834.ngrok.io/patient/signup?firebase_id=" + FirebaseAuth.getInstance().currentUser!!.uid)
+                            .url(getSharedPreferences("covid", 0).getString("server","https://883aad4af71a.ngrok.io") + "/patient/signup?firebase_id=" + FirebaseAuth.getInstance().currentUser!!.uid)
                             .method("POST", body)
                             .build()
                     client.newCall(request).enqueue(object : Callback {
@@ -123,7 +143,7 @@ class IntroActivity : AppCompatActivity() {
                     val mediaType: MediaType? = MediaType.parse("text/plain")
                     val body = RequestBody.create(mediaType, "")
                     val request: Request = Request.Builder()
-                            .url("https://fa4b4c235834.ngrok.io/doctor/signup?firebase_id=" + FirebaseAuth.getInstance().currentUser!!.uid)
+                            .url(getSharedPreferences("covid", 0).getString("server","https://883aad4af71a.ngrok.io") + "/doctor/signup?firebase_id=" + FirebaseAuth.getInstance().currentUser!!.uid)
                             .method("POST", body)
                             .build()
                     client.newCall(request).enqueue(object : Callback {

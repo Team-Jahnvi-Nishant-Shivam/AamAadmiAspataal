@@ -99,7 +99,7 @@ public class CreateAppointmentActivity extends AppCompatActivity implements Adap
         MediaType mediaType1 = MediaType.parse("text/plain");
         RequestBody body1 = RequestBody.create(mediaType1, "");
         Request request1 = new Request.Builder()
-                .url("https://fa4b4c235834.ngrok.io/patient/update-details?name=" + String.valueOf(name.getText()) + "&phone_no=" + String.valueOf(phone.getText()))
+                .url(getSharedPreferences("covid", 0).getString("server","https://883aad4af71a.ngrok.io") + "/patient/update-details?name=" + String.valueOf(name.getText()) + "&phone_no=" + String.valueOf(phone.getText()))
                 .method("POST", body1)
                 .addHeader("Authorization", "patient " + FirebaseAuth.getInstance().getCurrentUser().getUid())
                 .build();
@@ -120,7 +120,7 @@ public class CreateAppointmentActivity extends AppCompatActivity implements Adap
         MediaType mediaType = MediaType.parse("text/plain");
         RequestBody body = RequestBody.create(mediaType, "");
         Request request = new Request.Builder()
-                .url("https://fa4b4c235834.ngrok.io/patient/book-appointment?doctor_id=" + doctorfinalid + "&problem_description=" + String.valueOf(message.getText()))
+                .url(getSharedPreferences("covid", 0).getString("server","https://883aad4af71a.ngrok.io") + "/patient/book-appointment?doctor_id=" + doctorfinalid + "&problem_description=" + String.valueOf(message.getText()))
                 .method("POST", body)
                 .addHeader("Authorization", "patient " + FirebaseAuth.getInstance().getCurrentUser().getUid())
                 .build();

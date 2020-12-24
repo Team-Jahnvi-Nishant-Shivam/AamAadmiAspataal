@@ -59,8 +59,8 @@ public class OldPrescriptionActivity extends AppCompatActivity {
         MediaType mediaType = MediaType.parse("text/plain");
         RequestBody body = RequestBody.create(mediaType, "");
         Request request = new Request.Builder()
-                .url("https://fa4b4c235834.ngrok.io/patient/get-all-appointments")
-                .method("POST", body)
+                .url(getSharedPreferences("covid", 0).getString("server","https://883aad4af71a.ngrok.io") + "/patient/get-all-appointments")
+                .method("GET", null)
                 .addHeader("Authorization", "patient " + FirebaseAuth.getInstance().getCurrentUser().getUid())
                 .build();
         client.newCall(request).enqueue(new Callback() {

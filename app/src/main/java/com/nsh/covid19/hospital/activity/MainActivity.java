@@ -1,5 +1,6 @@
 package com.nsh.covid19.hospital.activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -8,6 +9,11 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.nsh.covid19.hospital.R;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -23,6 +29,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.profile).setOnClickListener(this);
         findViewById(R.id.option3).setOnClickListener(this);
         findViewById(R.id.option4).setOnClickListener(this);
+
+        DatabaseReference callRef = FirebaseDatabase.getInstance().getReference("server");
+        ValueEventListener callListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    SharedPreferences preference = getSharedPreferences("covid", 0);
+                    SharedPreferences.Editor editor = preference.edit();
+                    editor.putString("server", snapshot.getValue(String.class));
+                    editor.commit();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        };
+        callRef.addValueEventListener(callListener);
     }
 
     @Override

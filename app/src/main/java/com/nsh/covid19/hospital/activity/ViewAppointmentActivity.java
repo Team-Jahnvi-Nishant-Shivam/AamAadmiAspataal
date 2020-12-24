@@ -62,10 +62,10 @@ public class ViewAppointmentActivity extends AppCompatActivity {
         if (sharedPreferences.getInt("type", 1) == 1) {
             type = "patient";
         }
-        System.out.println("https://fa4b4c235834.ngrok.io/" + type + "/get-all-appointments");
+        System.out.println(getSharedPreferences("covid", 0).getString("server","https://883aad4af71a.ngrok.io") + "/" + type + "/get-all-appointments");
         Request request = new Request.Builder()
-                .url("https://fa4b4c235834.ngrok.io/" + type + "/get-all-appointments")
-                .method("POST", body)
+                .url(getSharedPreferences("covid", 0).getString("server","https://883aad4af71a.ngrok.io") + "/" + type + "/get-all-appointments")
+                .method("GET", null)
                 .addHeader("Authorization", "type " + FirebaseAuth.getInstance().getCurrentUser().getUid())
                 .build();
         client.newCall(request).enqueue(new Callback() {

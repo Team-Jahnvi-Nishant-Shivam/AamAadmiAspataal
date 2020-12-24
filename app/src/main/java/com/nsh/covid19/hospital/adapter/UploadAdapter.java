@@ -38,7 +38,7 @@ public class UploadAdapter extends RecyclerView.Adapter<UploadAdapter.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Upload upload = uploads.get(position);
-        Picasso.get().load(upload.getImage()).into(holder.image);
+        Picasso.get().load(upload.getImage()).placeholder(R.drawable.logo).into(holder.image);
         if (type == 0) {
             holder.image.setOnClickListener(v -> {
                 Intent intent = new Intent(context, UploadActivity.class);

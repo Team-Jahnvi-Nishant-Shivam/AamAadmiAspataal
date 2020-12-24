@@ -13,8 +13,8 @@ public class ApplicationClass extends Application {
         super.onCreate();
         Map config = new HashMap();
         config.put("cloud_name", "thisisnsh");
-        config.put("api_key", "");
-        config.put("api_secret", "");
+        config.put("api_key", "742559798866256");
+        config.put("api_secret", "PBlbSiXhmrlCF5-XaLF6dbT4VK8");
         MediaManager.init(this, config);
     }
 }

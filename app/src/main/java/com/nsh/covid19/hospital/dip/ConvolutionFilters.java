@@ -9,12 +9,14 @@ public final class ConvolutionFilters {
     private Bitmap newImage;
 
     public enum filterType {SHARP, EDGE_DETECT, RELIEF, BLUR}
+
     public Bitmap Filter(Bitmap originalImage, filterType type) {
         setFilter(type);
         filter = getFilter();
         int width = originalImage.getWidth();
         int height = originalImage.getHeight();
         newImage = Bitmap.createBitmap(width, height, originalImage.getConfig());
+
         for (int x = 1; x < width - 1; x++) {
             for (int y = 1; y < height - 1; y++) {
                 createPixelMatrix(x, y, originalImage);
@@ -22,6 +24,7 @@ public final class ConvolutionFilters {
                 int sumBlues;
                 int sumGreens;
                 int sumReds = sumGreens = sumBlues = sumOfBlur = 0;
+
                 for (int i = 0; i < filter.length; i++) {
                     for (int j = 0; j < filter.length; j++) {
                         sumReds += (Color.red(pixelMatrix[i][j]) * filter[i][j]);
@@ -30,10 +33,12 @@ public final class ConvolutionFilters {
                         sumOfBlur += filter[i][j];
                     }
                 }
+
                 if (type == filterType.BLUR) {
                     sumReds /= sumOfBlur;
                     sumGreens /= sumOfBlur;
-                    sumBlues /= sumOfBlur;}
+                    sumBlues /= sumOfBlur;
+                }
 
                 int red = sumReds;
                 if (red < 0) {
@@ -49,6 +54,7 @@ public final class ConvolutionFilters {
                 newImage.setPixel(x, y, Color.rgb(red, green, blue));
             }
         }
+
         for (int k = 0; k < width; k++) {
             newImage.setPixel(k, 0, Color.rgb(Color.red(newImage.getPixel(k, 1)),
                     Color.green(newImage.getPixel(k, 1)), Color.blue(newImage.getPixel(k, 1))));
@@ -105,3 +111,5 @@ public final class ConvolutionFilters {
                     {0, 1, 2}};}
     }
 }
+
+

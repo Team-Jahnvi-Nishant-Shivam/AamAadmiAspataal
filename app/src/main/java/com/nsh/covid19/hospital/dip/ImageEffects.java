@@ -33,6 +33,7 @@ public final class ImageEffects {
                         int r = Color.red(bitmap.getPixel(i, j));
                         int b = Color.blue(bitmap.getPixel(i, j));
                         int g = Color.green(bitmap.getPixel(i, j));
+
                         int newR = (int) (r * 0.393 + g * 0.769 + b * 0.189);
                         int newG = (int) (r * 0.349 + g * 0.686 + b * 0.168);
                         int newB = (int) (r * 0.272 + g * 0.534 + b * 0.131);
@@ -75,7 +76,7 @@ public final class ImageEffects {
                         int b = Color.blue(bitmap.getPixel(i, j));
                         int g = Color.green(bitmap.getPixel(i, j));
 
-                        int grey = (int) (r * 0.21 + g * 0.72 + b * 0.11);
+                        int grey = (int) (r * 0.21 + g * 0.72 + b * 0.07);
                         if (grey > 255) grey = 255;
                         if (grey < 0) grey = 0;
                         newBmp.setPixel(i, j, Color.rgb(grey, grey, grey));

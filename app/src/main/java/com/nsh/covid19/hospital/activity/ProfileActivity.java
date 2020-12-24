@@ -64,8 +64,8 @@ public class ProfileActivity extends AppCompatActivity implements AdapterView.On
         MediaType mediaType = MediaType.parse("text/plain");
         RequestBody body = RequestBody.create(mediaType, "");
         Request request = new Request.Builder()
-                .url("https://fa4b4c235834.ngrok.io/doctor/get-details")
-                .method("POST", body)
+                .url(getSharedPreferences("covid", 0).getString("server","https://883aad4af71a.ngrok.io") + "/doctor/get-details")
+                .method("GET", null)
                 .addHeader("Authorization", "doctor " + FirebaseAuth.getInstance().getCurrentUser().getUid())
                 .build();
         client.newCall(request).enqueue(new Callback() {
@@ -82,9 +82,12 @@ public class ProfileActivity extends AppCompatActivity implements AdapterView.On
                     runOnUiThread(() -> {
                         try {
                             System.out.println(json1);
-                            name.setText(json1.getString("name"));
-                            email.setText(json1.getString("email_id"));
-                            license.setText(json1.getString("registration_no"));
+                            if (!json1.getString("name").equals("null"))
+                                name.setText(json1.getString("name"));
+                            if (!json1.getString("email_id").equals("null"))
+                                email.setText(json1.getString("email_id"));
+                            if (!json1.getString("registration_no").equals("null"))
+                                license.setText(json1.getString("registration_no"));
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -138,7 +141,7 @@ public class ProfileActivity extends AppCompatActivity implements AdapterView.On
             MediaType mediaType = MediaType.parse("text/plain");
             RequestBody body = RequestBody.create(mediaType, "");
             Request request = new Request.Builder()
-                    .url("https://fa4b4c235834.ngrok.io/doctor/update-details?name=" + String.valueOf(name.getText()) + "&email=" + String.valueOf(email.getText()) + "&specialization=" + spefinal + "&registration_no=" + String.valueOf(license.getText()) + "&email_id=" + String.valueOf(email.getText()))
+                    .url(getSharedPreferences("covid", 0).getString("server","https://883aad4af71a.ngrok.io") + "/doctor/update-details?name=" + String.valueOf(name.getText()) + "&email=" + String.valueOf(email.getText()) + "&specialization=" + spefinal + "&registration_no=" + String.valueOf(license.getText()) + "&email_id=" + String.valueOf(email.getText()))
                     .method("POST", body)
                     .addHeader("Authorization", "doctor " + FirebaseAuth.getInstance().getCurrentUser().getUid())
                     .build();

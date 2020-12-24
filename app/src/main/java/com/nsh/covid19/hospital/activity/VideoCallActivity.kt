@@ -171,7 +171,6 @@ class VideoCallActivity : AppCompatActivity() {
                 init(videoSession?.renderContext, null, EglBase.CONFIG_RGBA, GLCircleDrawer())
                 setScalingType(RendererCommon.ScalingType.SCALE_ASPECT_FIT)
 //                setZOrderMediaOverlay(true)
-                //To make transparent
                 setZOrderOnTop(true)
                 holder.setFormat(PixelFormat.TRANSLUCENT)
                 setEnableHardwareScaler(true)

@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
+import android.view.WindowManager
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -45,6 +46,7 @@ class LobbyActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_patient)
 
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
         init()
 
         val name: TextView = findViewById(R.id.option)
@@ -117,7 +119,7 @@ class LobbyActivity : AppCompatActivity() {
                         val mediaType: MediaType? = MediaType.parse("text/plain")
                         val body = RequestBody.create(mediaType, "")
                         val request: Request = Request.Builder()
-                                .url("https://fa4b4c235834.ngrok.io/patient/upload-report?image_url=" + resultData.get("url") + "&report_details=details")
+                                .url(getSharedPreferences("covid", 0).getString("server","https://883aad4af71a.ngrok.io") + "/patient/upload-report?image_url=" + resultData.get("url") + "&report_details=details")
                                 .method("POST", body)
                                 .addHeader("Authorization", "patient " + FirebaseAuth.getInstance().currentUser!!.uid)
                                 .build()
@@ -164,7 +166,7 @@ class LobbyActivity : AppCompatActivity() {
         val mediaType: MediaType? = MediaType.parse("text/plain")
         val body = RequestBody.create(mediaType, "")
         val request: Request = Request.Builder()
-                .url("https://fa4b4c235834.ngrok.io/doctor/upload-prescription?appointment_id=" + intent.getStringExtra("id") + "&prescription_details=" + (prescription?.text
+                .url(getSharedPreferences("covid", 0).getString("server","https://883aad4af71a.ngrok.io") + "/doctor/upload-prescription?appointment_id=" + intent.getStringExtra("id") + "&prescription_details=" + (prescription?.text
                         ?: "No Comments"))
                 .method("POST", body)
                 .addHeader("Authorization", "doctor " + FirebaseAuth.getInstance().currentUser!!.uid)
@@ -185,12 +187,13 @@ class LobbyActivity : AppCompatActivity() {
 
 
     fun getData() {
+        list.clear();
         val client = OkHttpClient().newBuilder().build()
         val mediaType: MediaType? = MediaType.parse("text/plain")
         val body = RequestBody.create(mediaType, "")
         val request: Request = Request.Builder()
-                .url("https://fa4b4c235834.ngrok.io/patient/get-reports")
-                .method("POST", body)
+                .url(getSharedPreferences("covid", 0).getString("server","https://883aad4af71a.ngrok.io") + "/patient/get-reports")
+                .method("GET", null)
                 .addHeader("Authorization", "patient " + intent.getStringExtra("patient_id"))
                 .build()
         client.newCall(request).enqueue(object : Callback {
@@ -205,6 +208,7 @@ class LobbyActivity : AppCompatActivity() {
                     runOnUiThread {
                         val json1 = json.getJSONArray("reports")
                         for (i in 0..json1.length() - 1) {
+                            println(json1.getJSONObject(i).getString("image_url"))
                             list.add(Upload(json1.getJSONObject(i).getString("image_url")))
                         }
                         patientAdapter!!.notifyDataSetChanged()
